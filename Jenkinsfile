@@ -8,9 +8,21 @@ pipeline {
     SCANNER_HOME=tool 'sonarqube-scanner'
   }
   stages {
-    stage('') {
+    stage('Clean WorkSpace') {
       steps {
-        
+        cleanWs()
+      }
+    }
+    stage('Checkout SCM') {
+      steps {
+        git branch: 'main', credentialsId: 'github', url: 'https://github.com/avinashvrm03/a-swiggy-clone.git'
+      }
+    }
+    stage('Sonarqube Analysis') {
+      steps {
+        script {
+
+        }
       }
     }
   }
