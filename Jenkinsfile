@@ -5,7 +5,7 @@ pipeline {
     nodejs 'node16'    
   }
   environment{
-    SCANNER_HOME=tool 'sonarqube-scanner'
+    SCANNER_HOME=tool 'SonarQube-Server'
   }
   stages {
     stage('Clean WorkSpace') {
@@ -21,7 +21,9 @@ pipeline {
     stage('Sonarqube Analysis') {
       steps {
         script {
-
+            withSonarQubeEnv() {
+              sh "${scannerHome}/bin/SonarQube-Server"
+                }
         }
       }
     }
