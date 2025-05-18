@@ -1,7 +1,7 @@
 pipeline {
   agent { label "Jenkins-Agent" }
   tools {
-    jdk 'Java21'
+    jdk 'java21'
     nodejs 'node16'    
   }
   environment{
