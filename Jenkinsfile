@@ -2,7 +2,8 @@ pipeline {
   agent { label "Jenkins-Agent" }
   tools {
     jdk 'jdk21'
-    nodejs 'node16'    
+    nodejs 'node16' 
+    sonarScanner 'SonarScanner-CLI'
   }
   environment{
     SCANNER_HOME=tool 'sonarqube-scanner'
