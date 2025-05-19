@@ -6,12 +6,12 @@ pipeline {
   }
   environment{
     SCANNER_HOME=tool 'sonarqube-scanner'
-    APP= 'swiggy-clone'
-    RELEASE= '1.0.0'
-    DOCKER_USER= 'avinash0001'
-    DOCKER_PASS= 'dockerhub'
-    IMAGE_NAME='${DOCKER_USER}/${APP}'
-    IMAGE_TAG='${RELEASE}-${BUILD_NUMBER}'
+    APP= "swiggy-clone"
+    RELEASE= "1.0.0"
+    DOCKER_USER= "avinash0001"
+    DOCKER_PASS= "dockerhub"
+    IMAGE_NAME="${DOCKER_USER}/${APP}"
+    IMAGE_TAG="${RELEASE}-${BUILD_NUMBER}"
   }
   stages {
     stage('Clean WorkSpace') {
