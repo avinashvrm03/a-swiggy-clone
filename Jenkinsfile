@@ -21,9 +21,10 @@ pipeline {
     stage('Sonarqube Analysis') {
       steps {
         script {
-            withSonarQubeEnv() {
-              sh "${SCANNER_HOME}/bin/sonar-scanner"
-                }
+                 withSonarQubeEnv('SonarQube-Server') {
+                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=a-swiggy-clone \
+                     -Dsonar.projectKey=a-swiggy-clone '''
+                 }
         }
       }
     }
