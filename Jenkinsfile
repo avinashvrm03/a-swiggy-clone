@@ -22,7 +22,7 @@ pipeline {
       steps {
         script {
             withSonarQubeEnv() {
-              sh "${scannerHome}/bin/sonarqube-scanner"
+              sh "${SCANNER_HOME}/bin/sonarqube-scanner"
                 }
         }
       }
