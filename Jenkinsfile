@@ -45,7 +45,11 @@ pipeline {
     stage('TRIVY FS SCAN') {
       steps {
         script {
-          sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock $PWD:/src aquasec/trivy fs /src > trivyfs.txt'
+          sh '''
+        docker run --rm \
+          -v $(pwd):/src \
+          aquasec/trivy fs /src > trivyfs.txt
+        '''
         }
       }
     }
