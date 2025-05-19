@@ -6,6 +6,12 @@ pipeline {
   }
   environment{
     SCANNER_HOME=tool 'sonarqube-scanner'
+    APP= 'swiggy-clone'
+    RELEASE= '1.0.0'
+    DOCKER_USER= 'avinash0001'
+    DOCKER_PASS= 'dockerhub'
+    IMAGE_NAME='${DOCKER_USER}/${APP}'
+    IMAGE_TAG='${RELEASE}-${BUILD_NUMBER}'
   }
   stages {
     stage('Clean WorkSpace') {
@@ -42,14 +48,16 @@ pipeline {
         }
       }
     }
-    stage('TRIVY FS SCAN') {
+    stage('Build And Push') {
       steps {
         script {
-          sh '''
-        docker run --rm \
-          -v $(pwd):/src \
-          aquasec/trivy fs /src > trivyfs.txt
-        '''
+          docker.withRegitry('', DOCKER_PASS) {
+            docker_image = docker.build"${IMAGE_NAME}"            
+          }
+          docker.withRegistry('', DOCKER_PASS) {
+            docker_image.push"${IMAGE_TAG}"
+            docker_image.push('latest')
+          }
         }
       }
     }
