@@ -61,5 +61,10 @@ pipeline {
         }
       }
     }
+    stage('Trivy Scan') {
+      steps {
+        sh ' docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image avinash0001/swiggy-clone:latest'
+      }
+    }
   }
 }
