@@ -65,5 +65,18 @@ pipeline {
         sh ' docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image avinash0001/swiggy-clone:latest'
       }
     }
+    stage('Deploy to Kubernets') {
+      steps {
+        script {
+          dir('Kubernetes') {
+            withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: '', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+              sh 'kubectl delete --all pods'
+              sh 'kubectl apply -f deployment.yml'
+              sh 'kubectl apply -f service.yml'
+          }
+          }
+        }
+      }
+    }
   }
 }
