@@ -69,7 +69,7 @@ pipeline {
       steps {
         script {
           dir('Kubernetes') {
-            withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: '', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+            withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
               sh 'kubectl delete --all pods'
               sh 'kubectl apply -f deployment.yml'
               sh 'kubectl apply -f service.yml'
