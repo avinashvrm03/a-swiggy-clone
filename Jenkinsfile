@@ -26,7 +26,8 @@ pipeline {
       steps {
         script {
           withSonarQubeEnv('SonarQube-Server') {
-            sh "${SONAR_HOME}/bin/sonar-scanner"
+            sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectName= a-swiggy-clone \
+            -Dsonar.projectKey= a-swiggy-clone "
           }
         }
       }
